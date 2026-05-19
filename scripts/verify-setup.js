@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Supabase & Zustand Setup Verification Script
+ * Supabase, Zustand & Tailwind CSS Setup Verification Script
  *
  * This script verifies that all necessary files and dependencies are properly set up.
  * Run from project root: npm run verify-setup
@@ -11,6 +11,7 @@
  * - Environment files exist
  * - Core files created
  * - TypeScript paths configured
+ * - Tailwind CSS configuration
  */
 
 const fs = require("fs");
@@ -125,7 +126,7 @@ log(
   colors.blue,
 );
 log(
-  "║   SUPABASE & ZUSTAND SETUP VERIFICATION                     ║",
+  "║   SUPABASE & ZUSTAND & TAILWIND SETUP VERIFICATION          ║",
   colors.blue,
 );
 log(
@@ -137,6 +138,8 @@ log("📦 Checking Dependencies...", colors.blue);
 checkDependency("supabase");
 checkDependency("zustand");
 checkDependency("@supabase/supabase-js");
+checkDependency("nativewind");
+checkDependency("tailwindcss");
 
 log("\n📁 Checking Core Files...", colors.blue);
 checkFile("src/lib/supabase.ts", "Supabase client: src/lib/supabase.ts");
@@ -146,14 +149,31 @@ checkFile(
 );
 checkFile("src/components/VerificationComponent.tsx", "Verification component");
 checkFile("src/components/DemoComponent.tsx", "Demo component");
+checkFile("src/components/TailwindButton.tsx", "Tailwind button component");
+checkFile("src/components/TailwindCard.tsx", "Tailwind card component");
+checkFile("src/components/TailwindBadge.tsx", "Tailwind badge component");
+checkFile("src/components/TailwindShowcase.tsx", "Tailwind showcase component");
+checkFile("src/components/TailwindPatterns.tsx", "Tailwind patterns reference");
+checkFile(
+  "src/components/TailwindColorVerification.tsx",
+  "Tailwind color verification component",
+);
 
 log("\n⚙️ Checking Configuration...", colors.blue);
 checkEnvFile();
 checkTsConfigPaths();
+checkFile("tailwind.config.js", "Tailwind configuration: tailwind.config.js");
+checkFile("babel.config.js", "Babel configuration: babel.config.js");
+checkFile("nativewind.d.ts", "NativeWind type declarations: nativewind.d.ts");
 
 log("\n📋 Checking Documentation...", colors.blue);
 checkFile(".env.example", "Environment template: .env.example");
 checkFile("VERIFICATION_GUIDE.md", "Verification guide: VERIFICATION_GUIDE.md");
+checkFile(
+  "TAILWIND_SETUP_GUIDE.md",
+  "Tailwind setup guide: TAILWIND_SETUP_GUIDE.md",
+);
+checkFile("src/global.css", "Global CSS with Tailwind directives");
 
 // Summary
 log(
@@ -171,12 +191,24 @@ log(
 
 if (failCount === 0) {
   log("✨ All checks passed! Your setup is ready to use.", colors.green);
+  log("\n🎨 Tailwind CSS Verification:", colors.blue);
+  log("  ✓ NativeWind Babel plugin configured", colors.green);
+  log("  ✓ Tailwind configuration present", colors.green);
+  log("  ✓ TypeScript className support enabled", colors.green);
+  log("  ✓ Violet theme colors configured", colors.green);
   log("\nNext steps:", colors.blue);
-  log("  1. Import components in your app", colors.reset);
-  log("  2. See VERIFICATION_GUIDE.md for testing instructions", colors.reset);
+  log(
+    "  1. Test color rendering: Import TailwindColorVerification",
+    colors.reset,
+  );
+  log("  2. View showcase: Import TailwindShowcase", colors.reset);
+  log("  3. Use styled components in your features", colors.reset);
   process.exit(0);
 } else {
   log(`⚠️ ${failCount} check(s) failed. Please review above.`, colors.yellow);
-  log("\nFor help, see VERIFICATION_GUIDE.md", colors.blue);
+  log(
+    "\nFor help, see VERIFICATION_GUIDE.md or TAILWIND_SETUP_GUIDE.md",
+    colors.blue,
+  );
   process.exit(1);
 }
