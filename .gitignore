@@ -41,3 +41,7 @@ app-example
 # generated native folders
 /ios
 /android
+
+# generated files
+agent.md
+theme.md
